@@ -1,0 +1,37 @@
+{
+  "name": "webtemplatevue",
+  "version": "1.0.0",
+  "description": "boilerplate for Vue projects",
+  "source": "src/index.html",
+  "scripts": {
+    "dev": "parcel serve --no-cache",
+    "build": "parcel build --public-url ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MLousdal/webTemplateVue.git"
+  },
+  "keywords": [
+    "boilerplate",
+    "vue",
+    "parcel"
+  ],
+  "author": "MLousdal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MLousdal/webTemplateVue/issues"
+  },
+  "homepage": "https://github.com/MLousdal/webTemplateVue#readme",
+  "devDependencies": {
+    "@parcel/transformer-image": "^2.0.0",
+    "@parcel/transformer-sass": "^2.0.0",
+    "@parcel/transformer-vue": "^2.0.0",
+    "autoprefixer": "^10.3.7",
+    "parcel": "^2.0.0",
+    "postcss": "^8.3.9"
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "vue": "^3.2.19"
+  }
+}
