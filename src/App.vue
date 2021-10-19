@@ -7,20 +7,22 @@
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
-      class="youtube"
+      class="video"
+      v-if="videoUrl"
     ></iframe>
-    <img :src="apod.url" alt="APOD" />
+    <img :src="apod.url" alt="APOD" v-else />
     <div class="flex between align-center wide">
       <h1>{{ apod.title }}</h1>
     </div>
     <div class="flex wide gap-1 btn-container">
       <button @click="toggleExplenation">Explanation</button>
       <button @click="toggleCopyright">Copyright</button>
+      <a :href="apod.hdurl" target="_blank" rel="noopener noreferrer" class="btn external-link">Full Resolution</a>
       <input
         type="date"
         name="date"
         class="auto-left"
-        v-model="apod.date"
+        :value="apod.date"
         @change="newDate($event)"
       />
     </div>
@@ -33,6 +35,7 @@
 import axios from "axios";
 let NASAurl = "https://api.nasa.gov/planetary/apod";
 let NASAkey = "?api_key=omoaeca7rC6uT4dse25qNh65bUFRJDAIsBUAgVN4";
+let url = null;
 
 export default {
   name: "App",
@@ -40,8 +43,8 @@ export default {
     return {
       apod: {
         date: null,
-        url: null,
-        hdurl: null,
+        url: "",
+        hdurl: "",
       },
       showExplenation: false,
       showCopyright: false,
@@ -68,13 +71,27 @@ export default {
       this.apod = response.data;
     });
   },
+  computed: {
+    videoUrl() {
+      url = this.apod.url;
+
+      if (url.includes("youtube") || url.includes("vimeo")) {
+        return true;
+      }
+      return false;
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-.youtube {
+.video {
   width: 100%;
   aspect-ratio: 16 / 9;
+}
+
+.btn.external-link::after {
+  vertical-align: top;
 }
 
 @media screen and (max-width: 400px) {
