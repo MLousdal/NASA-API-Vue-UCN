@@ -1,19 +1,24 @@
 <template>
   <main class="box wrapper flex column gap-1">
-    <picture>
-      <source media="(min-width:1100px)" :srcset="apod.hdurl" />
-      <img :src="apod.url" alt="APOD" />
-    </picture>
+    <iframe
+      height="100%"
+      :src="apod.url"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      class="youtube"
+    ></iframe>
+    <img :src="apod.url" alt="APOD" />
     <div class="flex between align-center wide">
-      <h3>{{ apod.title }}</h3>
+      <h1>{{ apod.title }}</h1>
     </div>
-    <div class="flex wide gap-1">
+    <div class="flex wide gap-1 btn-container">
       <button @click="toggleExplenation">Explanation</button>
       <button @click="toggleCopyright">Copyright</button>
       <input
         type="date"
         name="date"
-        id="apodDate"
         class="auto-left"
         v-model="apod.date"
         @change="newDate($event)"
@@ -35,6 +40,8 @@ export default {
     return {
       apod: {
         date: null,
+        url: null,
+        hdurl: null,
       },
       showExplenation: false,
       showCopyright: false,
@@ -64,4 +71,15 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.youtube {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+@media screen and (max-width: 400px) {
+  .btn-container {
+    overflow-x: scroll;
+  }
+}
+</style>
