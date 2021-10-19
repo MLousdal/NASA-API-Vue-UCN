@@ -17,7 +17,7 @@
     <div class="flex wide gap-1 btn-container">
       <button @click="toggleExplenation">Explanation</button>
       <button @click="toggleCopyright">Copyright</button>
-      <a :href="apod.hdurl" target="_blank" rel="noopener noreferrer" class="btn external-link">Full Resolution</a>
+      <a :href="apod.hdurl" target="_blank" rel="noopener noreferrer" class="btn external-link" v-if="!videoUrl">Full Resolution</a>
       <input
         type="date"
         name="date"
